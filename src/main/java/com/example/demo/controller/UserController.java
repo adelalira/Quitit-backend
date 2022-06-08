@@ -191,7 +191,6 @@ public class UserController {
 			throw new UserNotFoundException();
 		}
 		
-		
 		if (username == null & password==null) {
 			return userService.getUserEmail(email);
 		} else {
@@ -352,6 +351,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}
 	
+	/**
+	 * Logro no encontrado
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(AchievementNotFoundException.class)
 	public ResponseEntity<ApiError> AchievementNotFoundException(AchievementNotFoundException ex)
 			throws Exception {
@@ -363,6 +368,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}
 	
+	/**
+	 * Logro ya esta añadido anteriormente
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(AchievementAlreadyAddedException.class)
 	public ResponseEntity<ApiError> AchievementAlreadyAddedException(AchievementAlreadyAddedException ex)
 			throws Exception {
@@ -374,6 +385,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e);
 	}
 	
+	/**
+	 * Logro no añadido
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(AchievementNotAddedException.class)
 	public ResponseEntity<ApiError> AchievementNotAddedException(AchievementNotAddedException ex)
 			throws Exception {
@@ -385,6 +402,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e);
 	}
 	
+	/**
+	 * Penalty no añadido
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(PenaltyNotAddedException.class)
 	public ResponseEntity<ApiError> PenaltyNotAddedException(PenaltyNotAddedException ex)
 			throws Exception {
@@ -396,6 +419,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e);
 	}
 	
+	/**
+	 * Penalty ya añadido anteriormente
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(PenaltyAlreadyAddedException.class)
 	public ResponseEntity<ApiError> PenaltyAlreadyAddedException(PenaltyAlreadyAddedException ex)
 			throws Exception {
@@ -407,6 +436,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e);
 	}
 	
+	/**
+	 * Penalty no encontrado
+	 * @param ex
+	 * @return
+	 * @throws Exception
+	 */
 	@ExceptionHandler(PenaltyNotFoundException.class)
 	public ResponseEntity<ApiError> PenaltyNotFoundException(PenaltyNotFoundException ex)
 			throws Exception {

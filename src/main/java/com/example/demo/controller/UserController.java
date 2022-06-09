@@ -40,14 +40,11 @@ import com.example.demo.service.UserService;
 @RestController
 public class UserController {
 
-	@Autowired
-	private UserRepo userRepo;
+	@Autowired private UserRepo userRepo;
 
-	@Autowired
-	private UserService userService;
+	@Autowired private UserService userService;
 
-	@Autowired
-	private SmtpMailSender smtpMailSender;
+	@Autowired private SmtpMailSender smtpMailSender;
 	
 	@Autowired PenaltyService penaltyService;
 

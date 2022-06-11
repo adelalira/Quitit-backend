@@ -11,7 +11,7 @@ public class CorsConfig implements WebMvcConfigurer {
 	/**
 	 * Variable que contiene la url del Front end
 	 */
-	static final String urlFront = "https://adelalira.github.io/";
+	static final String urlFront = "https://adelalira.github.io";
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {

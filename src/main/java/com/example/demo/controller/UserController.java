@@ -29,6 +29,7 @@ import com.example.demo.error.PenaltyNotAddedException;
 import com.example.demo.error.PenaltyNotFoundException;
 import com.example.demo.error.UserNotFoundException;
 import com.example.demo.model.Achievement;
+import com.example.demo.model.LoginCredentials;
 import com.example.demo.model.Message;
 import com.example.demo.model.Penalty;
 import com.example.demo.model.User;
@@ -115,7 +116,7 @@ public class UserController {
 	public User updateUser(@RequestParam(required = false) Integer cigarettes, 
 			@RequestParam(required = false) Double money, @RequestParam(required = false) Boolean reset,
 			@RequestParam(required = false) Boolean message, @RequestParam(required = false) String urlImage,  
-			@RequestBody(required=false) String password) {
+			@RequestBody(required=false) LoginCredentials body) {
 		
 		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userRepo.findByEmail(email);
@@ -132,8 +133,8 @@ public class UserController {
 			return userService.updateUserAfertSmoking(cigarettes, user);
 		} else if (message != null) {
 			return userService.setPropertyMessageToFalse(user);
-		} else if (password != null) {
-			return userService.changePass(user, password);
+		} else if (body != null) {
+			return userService.changePass(user, body);
 		} 
 		
 			else {

@@ -479,9 +479,9 @@ public class UserService {
 		
 	}
 
-	public User changePass(User user, String password) {
+	public User changePass(User user, LoginCredentials body) {
 		if (userRepo.existsById(user.getId())) {
-			user.setPassword(passwordEncoder.encode(password));
+			user.setPassword(passwordEncoder.encode(body.getPassword()));
 			return userRepo.saveAndFlush(user);
 		} else {
 			return null;

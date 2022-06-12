@@ -30,7 +30,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param busqueda
 	 * @return
 	 */
-	@Query(value = "SELECT * FROM user WHERE username LIKE %:username% AND id != :idUser ", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario WHERE username LIKE %:username% AND id != :idUser ", nativeQuery = true)
 	public List<User> findByUsername(String username, Long idUser);
 	
 	/**
@@ -39,7 +39,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param idUser
 	 * @return lista de usuarios
 	 */
-	@Query(value = "SELECT * FROM user WHERE username LIKE %:username% AND id != :idUser AND id IN (SELECT friends_id FROM user_friends WHERE user_id = :idUser)", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario WHERE username LIKE %:username% AND id != :idUser AND id IN (SELECT friends_id FROM user_friends WHERE user_id = :idUser)", nativeQuery = true)
 	public List<User> findFriendsByUsername(String username, Long idUser);
 	
 	/**
@@ -57,7 +57,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * 
 	 * @return
 	 */
-	@Query(value = "select * from \\\"user\\\"", nativeQuery = true)
+	@Query(value = "select * from usuario", nativeQuery = true)
 	public List<User> findAllUsers();
 
 	/**
@@ -66,7 +66,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param busqueda
 	 * @return
 	 */
-	@Query(value = "SELECT * FROM user WHERE username = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario WHERE username = ?1", nativeQuery = true)
 	public User findByUsernameComplete(String username);
 
 	/**
@@ -82,7 +82,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * 
 	 * @return
 	 */
-	@Query(value = "SELECT * FROM user", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario", nativeQuery = true)
 	public List<User> findUsers();
 
 
@@ -93,7 +93,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * Consigue la propiedad message que indica si se le ha enviado un mensaje al usuario
 	 * @return message (boolean)
 	 */
-	@Query(value = "SELECT message FROM user", nativeQuery = true)
+	@Query(value = "SELECT message FROM usuario", nativeQuery = true)
 	public List<Boolean> getPropertyMessage();
 
 }

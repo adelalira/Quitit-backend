@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Table(name = "\"user\"")//user es una palabra reservada en Postgres...
+@Table(name = "usuario")//user es una palabra reservada en Postgres...
 public class User {
 
 	@Id

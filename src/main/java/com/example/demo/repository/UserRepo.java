@@ -57,7 +57,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * 
 	 * @return
 	 */
-	@Query(value = "select * from \"user\"", nativeQuery = true)
+	@Query(value = "select * from \\\"user\\\"", nativeQuery = true)
 	public List<User> findAllUsers();
 
 	/**

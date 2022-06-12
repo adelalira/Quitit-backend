@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		         .antMatchers("/mail").permitAll()
 		         .antMatchers("/email").permitAll()
 		         .antMatchers("/commentsCommunity").hasAnyRole("USER","ADMIN")
-		         .antMatchers("//commentsCommunity/{idC}").permitAll()	
+		         .antMatchers("/commentsCommunity/{idC}").permitAll()	
 		         .antMatchers("/incidence").permitAll()	
 		         .antMatchers("/incidence/{idi}").permitAll()
 		         .antMatchers("/users").permitAll()

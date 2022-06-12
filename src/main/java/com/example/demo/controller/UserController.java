@@ -204,9 +204,9 @@ public class UserController {
 	 * 
 	 * @return lista de usuariios
 	 */
-	@PostMapping("/users")
+	@GetMapping("/users")
 	public List<User> getAllUsersRanking(@RequestParam(required = false) String username,
-			@RequestParam(required = false) String friend, @RequestBody(required = false) List<User> groupMembers) {
+			@RequestParam(required = false) String friend) {
 		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User result = userRepo.findByEmail(email);
 
@@ -215,8 +215,6 @@ public class UserController {
 		} else {
 			if (username != null) {
 				return userService.getUsername(username, result.getId());
-			} else if (friend != null) {
-				return userService.getFriendUsername(friend, result.getId(), groupMembers);
 			} else {
 				return userService.getAllUsers();
 			}

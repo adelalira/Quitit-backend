@@ -39,7 +39,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param idUser
 	 * @return lista de usuarios
 	 */
-	@Query(value = "SELECT * FROM usuario WHERE username LIKE %:username% AND id != :idUser AND id IN (SELECT friends_id FROM user_friends WHERE user_id = :idUser)", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario WHERE username LIKE %:username% AND id != :idUser AND id IN (SELECT friends_id FROM usuario_friends WHERE usuario_id = :idUser)", nativeQuery = true)
 	public List<User> findFriendsByUsername(String username, Long idUser);
 	
 	/**
@@ -48,7 +48,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param idFriend
 	 * @return id del ususario ya amigo
 	 */
-	@Query(value= "SELECT friends_id FROM user_friends WHERE user_id = ?1 AND friends_id = ?2", nativeQuery = true)
+	@Query(value= "SELECT friends_id FROM usuario_friends WHERE usuario_id = ?1 AND friends_id = ?2", nativeQuery = true)
 	public Long findUsersToAddFriends(Long idUser, Long idFriend);
 
 	/**
@@ -74,7 +74,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param long1
 	 * @return
 	 */
-	@Query(value = "SELECT friends_id FROM user_friends WHERE user_id = ?1", nativeQuery = true)
+	@Query(value = "SELECT friends_id FROM usuario_friends WHERE usuario_id = ?1", nativeQuery = true)
 	public List<Long> searchFriends(Long long1);
 
 	/**

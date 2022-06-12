@@ -134,7 +134,7 @@ public class CorsConfig implements WebMvcConfigurer {
 				/**
 				 * Muestra todos los usuarios
 				 */
-				registry.addMapping("users").allowedOrigins(urlFront)
+				registry.addMapping("/users").allowedOrigins(urlFront)
 				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 				.allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "accept", "Origin",
 						"Access-Control-Request-Method", "Access-Control-Request-Headers")

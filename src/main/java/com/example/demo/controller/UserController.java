@@ -204,7 +204,7 @@ public class UserController {
 	 * 
 	 * @return lista de usuariios
 	 */
-	@GetMapping("users")
+	@PostMapping("/users")
 	public List<User> getAllUsersRanking(@RequestParam(required = false) String username,
 			@RequestParam(required = false) String friend, @RequestBody(required = false) List<User> groupMembers) {
 		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

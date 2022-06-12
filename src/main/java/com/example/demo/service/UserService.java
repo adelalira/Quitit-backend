@@ -102,7 +102,7 @@ public class UserService {
 	 * @return usuarios candidatos a ser amigos
 	 */
 	public List<User> getUsername(String username, Long idUser) {
-		List<User> usuariosCoincidentes = userRepo.findByUsername( idUser);// no incluye al propio usuario
+		List<User> usuariosCoincidentes = userRepo.findByUsername(username, idUser);// no incluye al propio usuario
 		// Elimina los usuarios que sean administradores
 		for (User user : usuariosCoincidentes) {
 			if (user.getRol().equals("ADMIN")) {

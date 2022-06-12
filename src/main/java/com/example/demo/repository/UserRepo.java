@@ -30,8 +30,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param busqueda
 	 * @return
 	 */
-	@Query(value = "SELECT * FROM usuario WHERE AND id != :idUser ", nativeQuery = true)
-	public List<User> findByUsername( Long idUser);//username LIKE %:username%
+	@Query(value = "SELECT * FROM usuario WHERE id != :idUser ", nativeQuery = true)
+	public List<User> findByUsername( Long idUser);//AND username LIKE %:username%
 	
 	/**
 	 * Selecciona a los usuarios cuyos usernames coincidan con la búsqueda introducida y sean amigos del usuario que realiza la búsqueda.

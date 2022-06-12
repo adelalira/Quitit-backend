@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		         .antMatchers("/commentsCommunity/{idC}").permitAll()	
 		         .antMatchers("/incidence").permitAll()	
 		         .antMatchers("/incidence/{idi}").permitAll()
-		         .antMatchers("/users").permitAll()	
+		         .antMatchers("/users").hasAnyRole("USER","ADMIN")	
 		         .antMatchers("/users/**").hasAnyRole("USER","ADMIN")
 		         .antMatchers("/achievement").hasRole("USER")
 		         .antMatchers("/penalty").hasRole("USER")

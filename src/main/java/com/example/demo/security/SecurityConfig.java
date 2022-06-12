@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		         .antMatchers("/user/{idDelete}").hasRole("ADMIN") //solo borran usuarios los admin
 		         .antMatchers("/mail").permitAll()
 		         .antMatchers("/email").permitAll()
-		         .antMatchers("/commentsCommunity").hasAnyRole("USER","ADMIN")
+		         .antMatchers("/commentsCommunity").permitAll() //hasAnyRole("USER","ADMIN")
 		         .antMatchers("/commentsCommunity/{idC}").permitAll()	
 		         .antMatchers("/incidence").permitAll()	
 		         .antMatchers("/incidence/{idi}").permitAll()

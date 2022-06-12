@@ -90,6 +90,14 @@ public class CorsConfig implements WebMvcConfigurer {
 						"Access-Control-Request-Method", "Access-Control-Request-Headers")
 				.exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
+				/**
+				 * Mostrar todos los comentarios de la comunidad
+				 */
+				registry.addMapping("/commentsCommunity?").allowedOrigins(urlFront)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT")
+				.allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "accept", "Origin",
+						"Access-Control-Request-Method", "Access-Control-Request-Headers")
+				.exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
 				
 				/**
 				 * Muestra un comentario por su id
@@ -125,6 +133,26 @@ public class CorsConfig implements WebMvcConfigurer {
 				 * Muestra todos los usuarios
 				 */
 				registry.addMapping("/users").allowedOrigins(urlFront)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
+				.allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "accept", "Origin",
+						"Access-Control-Request-Method", "Access-Control-Request-Headers")
+				.exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
+				
+				
+				/**
+				 * Muestra todos los usuarios
+				 */
+				registry.addMapping("/users?").allowedOrigins(urlFront)
+				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
+				.allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "accept", "Origin",
+						"Access-Control-Request-Method", "Access-Control-Request-Headers")
+				.exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
+				
+				
+				/**
+				 * Muestra todos los usuarios
+				 */
+				registry.addMapping("/users?username").allowedOrigins(urlFront)
 				.allowedMethods("GET", "POST", "OPTIONS", "PUT","DELETE")
 				.allowedHeaders("Content-Type", "Authorization", "X-Requested-With", "accept", "Origin",
 						"Access-Control-Request-Method", "Access-Control-Request-Headers")

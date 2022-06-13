@@ -109,25 +109,19 @@ public class UserService {
 	public List<User> getUsername(String username, Long idUser) {
 		// List<User> usuariosCoincidentes = userRepo.findByUsername(username,
 		// idUser);// no incluye al propio usuario
+		List<User> usersADevolver = new ArrayList<>();
 		List<User> usuariosCoincidentes = new ArrayList<>();
 		usuariosCoincidentes = userRepo.findByUsername();
 		// Elimina los usuarios que sean administradores
 		if (!usuariosCoincidentes.isEmpty() && usuariosCoincidentes != null) {
 			for (User user : usuariosCoincidentes) {
-				if (user.getRol().equals("ADMIN")) {
-					usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));
-				}
-			}
-			for (User user : usuariosCoincidentes) {
 				Long idFriend = userRepo.findUsersToAddFriends(idUser, user.getId());
-				if (idFriend != null) {
-					usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));// elimina de la lista al usuario
-																					// que ya
-																					// sea amigo
+				if (!user.getRol().equals("ADMIN") && idFriend == null) {
+					usersADevolver.add(user);															
 				}
 			}
 		}
-		return usuariosCoincidentes;
+		return usersADevolver;
 	}
 
 	/**

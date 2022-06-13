@@ -164,17 +164,17 @@ public class QuititApplication  extends SpringBootServletInitializer  {
 		Penalty penalty8 = new Penalty("Pull over and come back", "30 cigarettes smoked", "stop-sign.png", 30,
 				"cigarette");
 		Penalty penalty9 = new Penalty("Where are you going?", "40 cigarettes smoked", "question.png", 40, "cigarette");
-		Penalty penalty10 = new Penalty("Quit it now!", "40 smoking days", "alzheimer.png", 40, "day");
-		Penalty penalty11 = new Penalty("Dude...", "50 smoking days", "alzheimer.png", 50, "day");
-		Penalty penalty12 = new Penalty("Quit it now!", "40 cigarettes smoked", "alzheimer.png", 50, "cigarette");
-		Penalty penalty13 = new Penalty("Are you proud?", "60 smoking days", "alzheimer.png", 60, "day");
-		Penalty penalty14 = new Penalty("Save your words for the judge", "60 cigarettes smoked", "alzheimer.png", 60,
+		Penalty penalty10 = new Penalty("Quit it now!", "40 smoking days", "quitsmoking.png", 40, "day");
+		Penalty penalty11 = new Penalty("Dude...", "50 smoking days", "confundido.png", 50, "day");
+		Penalty penalty12 = new Penalty("OMG!", "40 cigarettes smoked", "man.png", 50, "cigarette");
+		Penalty penalty13 = new Penalty("Are you proud?", "60 smoking days", "bad.png", 60, "day");
+		Penalty penalty14 = new Penalty("Save your words for the judge", "60 cigarettes smoked", "auction.png", 60,
 				"cigarette");
 		Penalty penalty15 = new Penalty("Fight!", "70 smoking days", "atlas.png", 70, "day");
-		Penalty penalty16 = new Penalty("This is war!", "80 cigarettes smoked", "alzheimer.png", 80, "cigarette");
-		Penalty penalty17 = new Penalty("Try again ...", "80  smoking days", "alzheimer.png", 80, "days");
-		Penalty penalty18 = new Penalty("Come on...", "90 cigarettes smoked", "alzheimer.png", 90, "cigarette");
-		Penalty penalty19 = new Penalty("What if you ready try it this time?", "90  smoking days", "alzheimer.png", 90,
+		Penalty penalty16 = new Penalty("This is war!", "80 cigarettes smoked", "tank.png", 80, "cigarette");
+		Penalty penalty17 = new Penalty("Try again ...", "80  smoking days", "shockwave.png", 80, "days");
+		Penalty penalty18 = new Penalty("Come on...", "90 cigarettes smoked", "heartDisease.png", 90, "cigarette");
+		Penalty penalty19 = new Penalty("What if you ready try it this time?", "90  smoking days", "kidney.png", 90,
 				"days");
 		Penalty penalty20 = new Penalty("You're letting me down", "100 cigarettes smoked", "alzheimer.png", 100,
 				"cigarette");

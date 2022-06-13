@@ -30,7 +30,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param busqueda
 	 * @return
 	 */
-	@Query(value = "SELECT * FROM usuario WHERE id=1", nativeQuery = true)
+	@Query(value = "SELECT * FROM usuario", nativeQuery = true)
 	public List<User> findByUsername();
 	//@Query(value = "SELECT * FROM usuario WHERE username LIKE %$1%", nativeQuery = true)
 	//public List<User> findByUsername(String username, Long idUser);

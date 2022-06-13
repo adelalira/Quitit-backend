@@ -48,31 +48,36 @@ import com.example.demo.repository.UserRepo;
 @Service
 public class UserService {
 
-	@Autowired UserRepo userRepo;
-	
-	@Autowired CommentsCommunityRepo commentsCommutinyRepo;
-	
-	@Autowired CommentsGroupRepo CommentsGroupRepo;
-	
-	@Autowired MeetUpRepo meetUpRepo;
+	@Autowired
+	UserRepo userRepo;
+
+	@Autowired
+	CommentsCommunityRepo commentsCommutinyRepo;
+
+	@Autowired
+	CommentsGroupRepo CommentsGroupRepo;
+
+	@Autowired
+	MeetUpRepo meetUpRepo;
 
 	@Autowired
 	AchievementRepo achievementRepo;
-	
-	@Autowired PenaltyRepo penaltyRepo;
+
+	@Autowired
+	PenaltyRepo penaltyRepo;
 
 	@Autowired
 	private AuthenticationManager authManager;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private GroupMemberRepository groupMemberRepository;
-	
+
 	@Autowired
 	private GroupRepository groupRepository;
-	
+
 	/**
 	 * Busca un usuario por email
 	 * 
@@ -102,19 +107,24 @@ public class UserService {
 	 * @return usuarios candidatos a ser amigos
 	 */
 	public List<User> getUsername(String username, Long idUser) {
-		//List<User> usuariosCoincidentes = userRepo.findByUsername(username, idUser);// no incluye al propio usuario
-		List<User> usuariosCoincidentes = userRepo.findByUsername();
+		// List<User> usuariosCoincidentes = userRepo.findByUsername(username,
+		// idUser);// no incluye al propio usuario
+		List<User> usuariosCoincidentes = new ArrayList<>();
+		usuariosCoincidentes = userRepo.findByUsername();
 		// Elimina los usuarios que sean administradores
-		for (User user : usuariosCoincidentes) {
-			if (user.getRol().equals("ADMIN")) {
-				usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));
+		if (!usuariosCoincidentes.isEmpty() && usuariosCoincidentes != null) {
+			for (User user : usuariosCoincidentes) {
+				if (user.getRol().equals("ADMIN")) {
+					usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));
+				}
 			}
-		}
-		for (User user : usuariosCoincidentes) {
-			Long idFriend = userRepo.findUsersToAddFriends(idUser, user.getId());
-			if (idFriend != null) {
-				usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));// elimina de la lista al usuario que ya
-																				// sea amigo
+			for (User user : usuariosCoincidentes) {
+				Long idFriend = userRepo.findUsersToAddFriends(idUser, user.getId());
+				if (idFriend != null) {
+					usuariosCoincidentes.remove(usuariosCoincidentes.indexOf(user));// elimina de la lista al usuario
+																					// que ya
+																					// sea amigo
+				}
 			}
 		}
 		return usuariosCoincidentes;
@@ -203,8 +213,9 @@ public class UserService {
 	}
 
 	/**
-	 * Añade un achievement al usuario.
-	 * Comprueba que exista y que el usuario no lo tenga ya añadido
+	 * Añade un achievement al usuario. Comprueba que exista y que el usuario no lo
+	 * tenga ya añadido
+	 * 
 	 * @param achievement
 	 * @param user
 	 * @return usuario modificado
@@ -224,10 +235,11 @@ public class UserService {
 		return userRepo.save(user);
 
 	}
-	
+
 	/**
-	 * Elimina un achievement del usuario.
-	 * Comprueba que exista y el usuario lo tenga incluido en su lista.
+	 * Elimina un achievement del usuario. Comprueba que exista y el usuario lo
+	 * tenga incluido en su lista.
+	 * 
 	 * @param idAchievement
 	 * @param user
 	 */
@@ -244,7 +256,7 @@ public class UserService {
 				found = true;
 			}
 		}
-		if(!found) {
+		if (!found) {
 			throw new AchievementNotAddedException();
 		}
 		user.getAchievementList().remove(achievement);
@@ -278,55 +290,52 @@ public class UserService {
 	 */
 	public void borrarUsuario(Long idDelete) {
 
-		//Comprueba que el usuario a borrar existe
-		
+		// Comprueba que el usuario a borrar existe
+
 		User user = userRepo.findById(idDelete).orElse(null);
 		Boolean found = false;
 		try {
-		
+
 			List<CommentCommunity> comentarios = commentsCommutinyRepo.findAll();
 			for (int i = 0; i < comentarios.size(); i++) {
-				if(comentarios.get(i).getUser().getId().equals(user.getId())) {
+				if (comentarios.get(i).getUser().getId().equals(user.getId())) {
 					commentsCommutinyRepo.deleteById(comentarios.get(i).getId());
 				}
 			}
-			
+
 			List<CommentsGroup> comentariosGrupo = CommentsGroupRepo.findAll();
 			for (int i = 0; i < comentariosGrupo.size(); i++) {
-				if(comentariosGrupo.get(i).getUser().getId().equals(user.getId())) {
+				if (comentariosGrupo.get(i).getUser().getId().equals(user.getId())) {
 					CommentsGroupRepo.deleteById(comentariosGrupo.get(i).getId());
 				}
 			}
-			
+
 			List<MeetUp> meetups = meetUpRepo.findAllMeetUps();
 			for (int i = 0; i < meetups.size(); i++) {
 				for (int j = 0; j < meetups.get(i).getAssistantsList().size(); j++) {
-					if(meetups.get(i).getAssistantsList().get(j).getId().equals(user.getId())) {
+					if (meetups.get(i).getAssistantsList().get(j).getId().equals(user.getId())) {
 						meetUpRepo.deleteById(meetups.get(i).getAssistantsList().get(j).getId());
 					}
 				}
-					
+
 			}
-			
+
 			List<Group> groupList = groupRepository.getGroupsFromUser(user.getId());
 			for (Group g : groupList) {
-				
-				boolean existe=false;
+
+				boolean existe = false;
 				Iterator<GroupMember> groupMember = g.getGroupMembers().iterator();
 
-				while (existe == false && groupMember.hasNext() ){
+				while (existe == false && groupMember.hasNext()) {
 					GroupMember e = groupMember.next();
-					if(e.getUser().equals(user)) {
+					if (e.getUser().equals(user)) {
 						g.getGroupMembers().remove(g.getGroupMembers().indexOf(e));
 						groupRepository.save(g);
 						groupMemberRepository.delete(e);
-						existe=true;
+						existe = true;
 					}
 				}
-				
-				
-				
-				
+
 //				for (GroupMember groupMember : g.getGroupMembers()) {
 //					if (user.equals(groupMember.getUser() )) {
 //						g.getGroupMembers().remove(g.getGroupMembers().indexOf(groupMember));
@@ -337,10 +346,7 @@ public class UserService {
 //					}
 //				}
 			}
-			
-			
-			
-			
+
 //			for (int i = 0; i < group.size(); i++) {
 //				for (int j = 0; j < group.get(i).getGroupMembers().size(); j++) {
 //					if(group.get(i).getGroupMembers().get(j).getUser().getUsername().equals(user.getUsername())) {
@@ -351,15 +357,15 @@ public class UserService {
 //					}
 //				}
 //			}
-			
+
 //			List<GroupMember> groupMember = groupMemberRepository.findAllGroupMembers();
 //			for (int i = 0; i < groupMember.size(); i++) {
 //				if(groupMember.get(i).getUser().getId().equals(user.getId())) {
 //					groupMemberRepository.deleteById(groupMember.get(i).getId());
 //				}
 //			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 
 			throw new UserNotFoundException();
 		}
@@ -434,18 +440,19 @@ public class UserService {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Elimina una penalización del usuario
+	 * 
 	 * @param user
 	 * @param id
 	 * @return usuario modificado
 	 */
 	public User addPenaltyToUser(User user, Long id) {
 		Penalty penalty;
-		if(penaltyRepo.getById(id) != null) {
+		if (penaltyRepo.getById(id) != null) {
 			penalty = penaltyRepo.getById(id);
-		}else {
+		} else {
 			throw new PenaltyNotFoundException();
 		}
 		Boolean found = false;
@@ -454,7 +461,7 @@ public class UserService {
 				found = true;
 			}
 		}
-		if(found) {
+		if (found) {
 			throw new PenaltyAlreadyAddedException();
 		}
 		user.getPenalties().remove(penalty);
@@ -468,16 +475,14 @@ public class UserService {
 					loggedInUser.getEmail(), loggedInUser.getPassword());
 
 			authManager.authenticate(authInputToken);
-			
-			//user.setPassword(passwordEncoder.encode(password));
-			//return userRepo.save(user);
+
+			// user.setPassword(passwordEncoder.encode(password));
+			// return userRepo.save(user);
 			return user;
 		} catch (Exception e) {
 			throw new PasswordException();
 		}
-		
-		
-		
+
 	}
 
 	public User changePass(User user, LoginCredentials body) {

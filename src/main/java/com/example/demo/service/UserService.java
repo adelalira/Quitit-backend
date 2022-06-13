@@ -111,7 +111,7 @@ public class UserService {
 		// idUser);// no incluye al propio usuario
 		List<User> usersADevolver = new ArrayList<>();
 		List<User> usuariosCoincidentes = new ArrayList<>();
-		usuariosCoincidentes = userRepo.findByUsername();
+		usuariosCoincidentes = userRepo.findByUsername(idUser);
 		// Elimina los usuarios que sean administradores
 		if (!usuariosCoincidentes.isEmpty() && usuariosCoincidentes != null) {
 			for (User user : usuariosCoincidentes) {

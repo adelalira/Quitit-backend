@@ -96,8 +96,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * @param idUser
 	 */
 //	@Modifying //declare that it is an update query and you don't expect a result back from the DB
-//	@Query(value="DELETE FROM usuario_friends WHERE friends_id = ?1 OR user_id = ?1", nativeQuery = true)
-//	public void deleteUserFriends(Long idUser);
+	@Query(value="DELETE FROM usuario_friends WHERE friends_id = ?1 OR user_id = ?1", nativeQuery = true)
+	public void deleteUserFriends(Long idUser);
 
 	/**
 	 * Consigue la propiedad message que indica si se le ha enviado un mensaje al usuario

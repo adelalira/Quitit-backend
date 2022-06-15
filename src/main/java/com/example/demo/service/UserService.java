@@ -331,7 +331,7 @@ public class UserService {
 			
 			user.getFriends().clear();
 			
-			//userRepo.deleteUserFriends(idDelete);
+			userRepo.deleteUserFriends(idDelete);
 
 		} catch (Exception e) {
 

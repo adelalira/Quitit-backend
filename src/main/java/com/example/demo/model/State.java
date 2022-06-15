@@ -8,7 +8,7 @@ package com.example.demo.model;
  */
 public enum State {
 
-	RESULT,
+	RESOLVED,
 
 	IN_PROCESS,
 

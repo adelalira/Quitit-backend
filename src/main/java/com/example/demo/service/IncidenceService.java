@@ -104,8 +104,8 @@ public class IncidenceService {
 			
 			Incidence incidence2 = incidenceRepo.findById(incidence.getId()).orElse(null);
 			
-			if(estado.equals("RESULT")) {
-				incidence2.setState(State.RESULT);
+			if(estado.equals("RESOLVED")) {
+				incidence2.setState(State.RESOLVED);
 			}
 			if(estado.equals("IN_PROCESS")) {
 				incidence2.setState(State.IN_PROCESS);

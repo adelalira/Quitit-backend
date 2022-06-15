@@ -72,7 +72,7 @@ public class User {
 	private Integer totalTimeWithoutSmoking = 0;
 
 	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.REMOVE})
+	@ManyToMany
 	private List<User> friends = new ArrayList<>();
 
 	

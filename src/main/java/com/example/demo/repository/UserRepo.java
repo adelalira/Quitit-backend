@@ -94,8 +94,11 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * eliminará la relación entre ambos.
 	 * @param idUser
 	 */
-	@Query(value="DELETE FROM usuario_friends WHERE user_id = ?1 OR friends_id = ?1", nativeQuery = true)
+	@Query(value="DELETE FROM usuario_friends WHERE user_id = ?1", nativeQuery = true)
 	public void deleteUserFriends(Long idUser);
+	
+	@Query(value="DELETE FROM usuario_friends WHERE friends_id = ?1", nativeQuery = true)
+	public void deleteUserFriends2(Long idUser);
 
 	
 	/**

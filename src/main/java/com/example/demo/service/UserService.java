@@ -329,7 +329,7 @@ public class UserService {
 				}
 			}
 			
-			userRepo.deleteUserFriends(idDelete);
+			//userRepo.deleteUserFriends(idDelete);
 
 		} catch (Exception e) {
 

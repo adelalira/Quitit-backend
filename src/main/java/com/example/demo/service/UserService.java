@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -287,7 +286,6 @@ public class UserService {
 		// Comprueba que el usuario a borrar existe
 
 		User user = userRepo.findById(idDelete).orElse(null);
-		Boolean found = false;
 		try {
 
 			List<CommentCommunity> comentarios = commentsCommutinyRepo.findAll();
@@ -329,35 +327,9 @@ public class UserService {
 						existe = true;
 					}
 				}
-
-//				for (GroupMember groupMember : g.getGroupMembers()) {
-//					if (user.equals(groupMember.getUser() )) {
-//						g.getGroupMembers().remove(g.getGroupMembers().indexOf(groupMember));
-//						groupRepository.save(g);
-//						groupMemberRepository.delete(groupMember);
-//						found=true;
-//						
-//					}
-//				}
 			}
-
-//			for (int i = 0; i < group.size(); i++) {
-//				for (int j = 0; j < group.get(i).getGroupMembers().size(); j++) {
-//					if(group.get(i).getGroupMembers().get(j).getUser().getUsername().equals(user.getUsername())) {
-//						group.get(i).deleteMember(group.get(i).getGroupMembers().get(j));
-//						groupRepository.save(group.get(i));
-//						groupMemberRepository.deleteById(group.get(i).getGroupMembers().get(j).getUser().getId());
-//						
-//					}
-//				}
-//			}
-
-//			List<GroupMember> groupMember = groupMemberRepository.findAllGroupMembers();
-//			for (int i = 0; i < groupMember.size(); i++) {
-//				if(groupMember.get(i).getUser().getId().equals(user.getId())) {
-//					groupMemberRepository.deleteById(groupMember.get(i).getId());
-//				}
-//			}
+			
+			userRepo.deleteUserFriends(idDelete);
 
 		} catch (Exception e) {
 

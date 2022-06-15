@@ -2,6 +2,8 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -95,7 +97,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	 * eliminará la relación entre ambos.
 	 * @param idUser
 	 */
-//	@Modifying //declare that it is an update query and you don't expect a result back from the DB
+	@Modifying //declare that it is an update query and you don't expect a result back from the DB
+	@Transactional
 	@Query(value="DELETE FROM usuario_friends WHERE friends_id = ?1 OR user_id = ?1", nativeQuery = true)
 	public void deleteUserFriends(Long idUser);
 

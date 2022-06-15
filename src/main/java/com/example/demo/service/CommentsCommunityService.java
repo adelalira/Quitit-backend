@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Achievement;
 import com.example.demo.model.CommentCommunity;
 import com.example.demo.model.User;
 import com.example.demo.repository.CommentsCommunityRepo;
+import com.example.demo.repository.IncidenceRepo;
 import com.example.demo.repository.UserRepo;
 
 @Service
@@ -20,6 +20,9 @@ public class CommentsCommunityService {
 
 	@Autowired
 	UserRepo userRepo;
+	
+	@Autowired
+	IncidenceRepo incidenceRepo;
 
 	/**
 	 * Devuelve una lista con todos los comentarios de la comunidad
@@ -63,7 +66,7 @@ public class CommentsCommunityService {
 		if (commentsCommutinyRepo.existsById(idC)) {
 
 			CommentCommunity c = commentsCommutinyRepo.findById(idC).get();
-
+			incidenceRepo.deleteIncidence(idC);
 			commentsCommutinyRepo.deleteById(idC);
 
 			return c;
